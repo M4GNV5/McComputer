@@ -1,5 +1,5 @@
 import("math")
-import("./libs/erminal.lua")
+import("./libs/terminal.lua")
 
 terminal_init()
 terminal_static_writeln("Hello World")
