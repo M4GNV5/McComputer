@@ -6,7 +6,7 @@ var selector = exports.terminal_selector = "@e[name=terminal,type=ArmorStand]";
 
 exports.terminal_static_writeln = function(s)
 {
-    var lines = s.match(/.{1,40}/g);
+    var lines = s.match(/[^\n]{1,40}/g);
     exports.terminal_static_free(lines[0].length);
 
     for(var i = 0; i < lines.length; i++)
@@ -15,7 +15,8 @@ exports.terminal_static_writeln = function(s)
         for(var ii = 0; ii < line.length; ii++)
         {
             var tag = bannertag(line[ii]);
-            command("execute {0} ~ ~ ~ setblock ~-{1} ~-{2} ~ wall_banner 2 replace {3}".format(selector, ii, i, tag));
+            command("execute {0} ~ ~ ~ setblock ~-{1} ~-{2} ~ wall_banner 2 replace {3}"
+                .format(selector, ii, i * 2, tag));
         }
     }
 
