@@ -8,7 +8,13 @@ var scoreName = scope.get("OBJECTIVE_NAME");
 
 exports.terminal_static_writeln = function(s)
 {
-    var lines = s.match(/[^\n]{1,40}/g);
+    s = s || "";
+    exports.terminal_static_write(s + "\n");
+}
+
+exports.terminal_static_write = function(s)
+{
+    var lines = s.match(/[^\n]{1,40}/g) || s.split("\n");
     exports.terminal_static_free(lines[0].length);
 
     for(var i = 0; i < lines.length; i++)
@@ -22,12 +28,16 @@ exports.terminal_static_writeln = function(s)
         }
     }
 
-    var y = lines.length * 2;
-    command("tp {0} 40 ~-{1} ~".format(selector, y));
+    var x = lines[lines.length - 1].length + 40;
+    var y = lines.length * 2 - 2;
+    command("tp {0} {1} ~-{2} ~".format(selector, x, y));
 }
 
 exports.terminal_static_free = function(length)
 {
+    if(length < 1)
+        return;
+
     command("execute {0} ~ ~ ~ detect ~-{1} ~ ~1 air -1 tp {0} 40 ~-2 ~".format(selector, length - 1));
 }
 
