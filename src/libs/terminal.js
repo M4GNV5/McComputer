@@ -4,6 +4,8 @@ var sizeX = exports.terminal_size_x = 40;
 var sizeY = exports.terminal_size_y = 24;
 var selector = exports.terminal_selector = "@e[name=terminal,type=ArmorStand]";
 
+var scoreName = scope.get("OBJECTIVE_NAME");
+
 exports.terminal_static_writeln = function(s)
 {
     var lines = s.match(/[^\n]{1,40}/g);
@@ -26,19 +28,19 @@ exports.terminal_static_writeln = function(s)
 
 exports.terminal_static_free = function(length)
 {
-    command("execute {0} ~ ~ ~ detect ~-{1} ~ ~1 air -1 tp {0} 40 ~-2 ~".format(selector, length));
+    command("execute {0} ~ ~ ~ detect ~-{1} ~ ~1 air -1 tp {0} 40 ~-2 ~".format(selector, length - 1));
 }
 
 exports._terminal_write = function(val)
 {
-    command("scoreboard players operation {0} cplVars = {1} cplVars".format(selector, val.name));
+    command("scoreboard players operation {0} {2} = {1} {2}".format(selector, val.name, scoreName));
     exports.terminal_static_free(1);
     var supportedLetters = Object.keys(letters);
     for(var i = 0; i < supportedLetters.length; i++)
     {
         var tag = letters[supportedLetters[i]];
         var charCode = supportedLetters[i].charCodeAt(0);
-        var sel = "@e[name=terminal,type=ArmorStand,score_cplVars_min={0},score_cplVars={0}]".format(charCode);
+        var sel = "@e[name=terminal,type=ArmorStand,score_{0}_min={1},score_{0}={1}]".format(scoreName, charCode);
         command("execute {0} ~ ~ ~ setblock ~ ~ ~ wall_banner 2 replace {1}".format(sel, tag));
     }
     command("tp {0} ~-1 ~ ~".format(selector));
