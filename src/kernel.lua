@@ -1,5 +1,6 @@
 import("math")
 import("./libs/terminal.lua")
+import("./libs/keyboard.lua")
 
 terminal_init()
 terminal_static_writeln("Hello World")
@@ -20,4 +21,9 @@ repeat
     terminal_write(val)
 
     i = i + 1
-until i > 30
+until i > 10
+
+repeat
+    char = keyboard_get()
+    terminal_write(char)
+until false
