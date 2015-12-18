@@ -1,6 +1,6 @@
 var fs = require("fs");
-var layout = fs.readFileSync(__dirname + "/keyboardlayout.txt").toString();
-var supportedLetters = Object.keys(require("./letters.json"));
+var layout = fs.readFileSync(__dirname + "/../../data/keyboardlayout.txt").toString();
+var supportedLetters = Object.keys(require("./../../data/letters.json"));
 
 var specialChars = {
     "ENTER": "\n".charCodeAt(0),

@@ -1,4 +1,4 @@
-var letters = require("./letters.json");
+var letters = require("./../../data/letters.json");
 
 var sizeX = exports.terminal_size_x = 40;
 var sizeY = exports.terminal_size_y = 24;
