@@ -1,23 +1,27 @@
-import("math")
+import("chat")
 import("./libs/terminal.lua")
 import("./libs/keyboard.lua")
+import("./libs/fs.lua")
+import("./libs/util.js")
 
+fs_init()
 terminal_init()
 terminal_static_writeln("McComputer v0")
 
-local input = {}
+terminal_static_writeln("Opening file readme")
 
-terminal_static_write("input ")
+local fd = fopen(strTable("readme"))
 
-while char ~= charCode("\n") do
-    char = keyboard_get()
-    input[#input + 1] = char
-
-    terminal_write(char)
+if fd == 0 then
+    terminal_static_writeln("failed to open file")
+else
+    repeat
+        local c = fgetc(fd)
+        terminal_write(c)
+    until c == 0
 end
 
-terminal_static_write("you wrote ")
-
-for i = 1, #input do
-    terminal_write(input[i])
-end
+repeat
+    local c = keyboard_get()
+    terminal_write(c)
+until false
