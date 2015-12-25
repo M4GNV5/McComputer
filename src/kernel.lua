@@ -7,7 +7,8 @@ terminal_static_writeln("McComputer v0")
 
 local input = {}
 
-local char = 0
+terminal_static_write("input ")
+
 while char ~= charCode("\n") do
     char = keyboard_get()
     input[#input + 1] = char
@@ -15,7 +16,7 @@ while char ~= charCode("\n") do
     terminal_write(char)
 end
 
-terminal_static_writeln("")
+terminal_static_write("you wrote ")
 
 for i = 1, #input do
     terminal_write(input[i])

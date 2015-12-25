@@ -14,7 +14,11 @@ exports.terminal_static_writeln = function(s)
 
 exports.terminal_static_write = function(s)
 {
-    var lines = s.match(/[^\n]{1,40}/g) || s.split("\n");
+    var _lines = s.split("\n");
+    var lines = [];
+    for(var i = 0; i < _lines.length; i++)
+        lines = lines.concat(_lines[i].match(/[^\n]{1,40}/g) || _lines[i]);
+
     exports.terminal_static_free(lines[0].length);
 
     for(var i = 0; i < lines.length; i++)
@@ -28,7 +32,7 @@ exports.terminal_static_write = function(s)
         }
     }
 
-    var x = lines[lines.length - 1].length + 40;
+    var x = 40 - lines[lines.length - 1].length;
     var y = lines.length * 2 - 2;
     command("tp {0} {1} ~-{2} ~".format(selector, x, y));
 }
