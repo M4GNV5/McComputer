@@ -19,7 +19,6 @@ exports.keyboard_show = function(val)
     var cmd = "/scoreboard players set {0} {1} ".format(val.name, scoreName);
     var lines = layout.split("\n");
 
-    command("setblock ~ ~1 ~ stone")
     tellraw((new Array(20 - lines.length + 1)).join("\n"));
 
     for(var i = 0; i < lines.length; i++) //split into multiple commands or command is too long for rcon
@@ -57,4 +56,9 @@ exports.keyboard_show = function(val)
         if(args.length > 0)
             tellraw.apply(undefined, args);
     }
+}
+
+exports.charCode = function(s)
+{
+    return s.charCodeAt(0);
 }
