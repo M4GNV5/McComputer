@@ -57,8 +57,3 @@ exports.keyboard_show = function(val)
             tellraw.apply(undefined, args);
     }
 }
-
-exports.charCode = function(s)
-{
-    return s.charCodeAt(0);
-}
