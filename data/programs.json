@@ -22,14 +22,6 @@
         "function": "write",
         "args": true
     },
-    "pwd": {
-        "file": "programs/fileutils.lua",
-        "function": "no_directories"
-    },
-    "cd": {
-        "file": "programs/fileutils.lua",
-        "function": "no_directories"
-    },
     "random": {
         "file": "programs/random.lua",
         "function": "random",
@@ -42,5 +34,17 @@
     "reboot": {
         "file": "programs/oscontrol.lua",
         "function": "reboot"
+    },
+    "pwd": {
+        "file": "programs/useless.lua",
+        "function": "no_directories"
+    },
+    "cd": {
+        "file": "programs/useless.lua",
+        "function": "no_directories"
+    },
+    "hcf": {
+        "file": "programs/useless.lua",
+        "function": "hcf"
     }
 }

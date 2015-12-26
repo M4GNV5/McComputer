@@ -50,7 +50,3 @@ function write(args)
     fwrite(fd, 0)
     fclose(fd)
 end
-
-function no_directories()
-    terminal_static_writeln("There is only one directory you fool")
-end
