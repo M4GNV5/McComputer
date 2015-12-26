@@ -35,7 +35,7 @@ exports.terminal_static_write = function(s)
         if(i + 1 < lines.length)
             command("tp {0} 40 ~-2 ~".format(selector));
         else
-            command("tp {0} {1} ~ ~".format(selector, 40 - lines[i].length));
+            command("tp {0} ~-{1} ~ ~".format(selector, lines[i].length));
     }
 }
 
