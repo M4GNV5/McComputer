@@ -5,6 +5,8 @@ import("./generate_shell.js")
 import("./shell_launch.lua")
 
 function shell()
+    local lastInput = {}
+
     repeat
         printf(">")
 
@@ -23,12 +25,15 @@ function shell()
             printf("%c", c)
         until c == charCode("\n")
 
+        if #input == 1 and input[1] == charCode(".") then
+            input = lastInput
+        else
+            lastInput = input
+        end
+
         local program, args = strsplit(input, charCode(" "))
 
         local exitcode = shell_launch(program, args)
-
-        import("chat")
-        tellraw("exitcode = ", exitcode)
 
         if exitcode == -1 then
             printf("Unknown command %s\n", program)
