@@ -1,4 +1,4 @@
-import("./fs.js")
+import("./util.js")
 
 -- fs at 1 10 5
 
@@ -14,7 +14,25 @@ function fs_init()
 end
 
 local currFd = 0
-function fopen(name)
+
+function fopen_id(id)
+    command("summon ArmorStand 1 10 5 {Tags:[\"fopen\"],NoGravity:true}")
+
+    command("setblock ~ ~1 ~ sponge")
+    scoreTp("@e[type=ArmorStand,tag=fopen]", id, 64, 0, 3, 0)
+
+    if "/execute @e[type=ArmorStand,tag=fopen] ~ ~ ~ testforblock ~ ~ ~ wool" then
+        currFd = currFd + 1
+        local fd = score("@e[type=ArmorStand,tag=fopen]", OBJECTIVE_NAME)
+        fd = currFd
+        command("entitydata @e[type=ArmorStand,tag=fopen] {Tags:[\"fd\"]}")
+        return currFd
+    else
+        return 0
+    end
+end
+
+function fopen_name(name)
     command("execute @e[type=ArmorStand,tag=file] ~ ~ ~ summon ArmorStand ~ ~ ~ {Tags:[\"fopen\"],NoGravity:true}")
 
     name[#name + 1] = 0
@@ -56,3 +74,13 @@ function fgetc(fd)
     _fs_uint8(fd, val, true)
     return val
 end
+
+function fwrite(fd, char)
+    _fs_write_uint8(fd, char)
+end
+
+function fsetpos(fd, line, column)
+    _fs_setpos(fd, line, column)
+end
+
+import("./fs.js")
