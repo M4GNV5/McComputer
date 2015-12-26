@@ -40,14 +40,27 @@ function fopen_name(name)
     for i = 1, #name do
 
         local selfScore = score("@e[type=ArmorStand,tag=fopen,c=1]", OBJECTIVE_NAME)
-        _fs_uint8("@e[type=ArmorStand,tag=fopen]", selfScore)
 
         local curr = name[i]
-        command("execute @e[type=ArmorStand,tag=fopen] ~ ~ ~ " ..
-            "scoreboard players operation @e[type=ArmorStand,tag=fopen,c=1] "..OBJECTIVE_NAME.." -= "..js_eval("curr.name").." "..OBJECTIVE_NAME)
+        local left, right = curr / 16, curr % 16
 
+        command("setblock ~ ~1 ~ sponge")
+
+        _fs_uint4("@e[type=ArmorStand,tag=fopen]", selfScore)
+        tellraw("left = ", left, " selfCore = ", selfScore)
+        command("execute @e[type=ArmorStand,tag=fopen] ~ ~ ~ " ..
+            "scoreboard players operation @e[type=ArmorStand,tag=fopen,c=1] "..OBJECTIVE_NAME.." -= "..js_eval("left.name").." "..OBJECTIVE_NAME)
         command("kill @e[type=ArmorStand,tag=fopen,score_" .. OBJECTIVE_NAME .. "_min=1]")
         command("kill @e[type=ArmorStand,tag=fopen,score_" .. OBJECTIVE_NAME .. "=-1]")
+
+        _fs_uint4("@e[type=ArmorStand,tag=fopen]", selfScore, 0, 0, 1)
+        tellraw("right = ", right, " selfCore = ", selfScore)
+        command("execute @e[type=ArmorStand,tag=fopen] ~ ~ ~ " ..
+            "scoreboard players operation @e[type=ArmorStand,tag=fopen,c=1] "..OBJECTIVE_NAME.." -= "..js_eval("right.name").." "..OBJECTIVE_NAME)
+        command("kill @e[type=ArmorStand,tag=fopen,score_" .. OBJECTIVE_NAME .. "_min=1]")
+        command("kill @e[type=ArmorStand,tag=fopen,score_" .. OBJECTIVE_NAME .. "=-1]")
+
+        command("tp @e[type=ArmorStand,tag=fopen] ~1 ~ ~")
     end
 
     local count = 0
