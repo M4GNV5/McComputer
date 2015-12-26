@@ -12,4 +12,10 @@ exports.strTable = function(s)
     return [val];
 }
 
+exports.strHash = function(s)
+{
+    s = s.toUpperCase()
+    return (s.charCodeAt(0) << 16) + (s.charCodeAt(1) << 8) + s.charCodeAt(2);
+}
+
 exports.log = console.log.bind(console);
