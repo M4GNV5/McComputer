@@ -2,7 +2,7 @@ var scoreName = scope.get("OBJECTIVE_NAME");
 var tmpScoreName = "MoonCraftTmp";
 var int = scope.get("int");
 
-exports._fs_uint4 = function(fd, val, offsetX, offsetY, offsetZ, mode)
+exports._fs_uint4 = function(fd, val, offsetX, offsetY, offsetZ, autoNewline)
 {
     var sel = exports.resolve_fd(fd);
 
@@ -18,6 +18,9 @@ exports._fs_uint4 = function(fd, val, offsetX, offsetY, offsetZ, mode)
         command("execute {0} ~ ~ ~ detect {1} {2} {3} wool {4} scoreboard players set {5} {6} {4}"
             .format(sel, offsetX, offsetY, offsetZ, i, valSel, _scoreName));
     }
+
+    if(autoNewline)
+        command("execute {0} ~ ~ ~ detect ~ ~ ~ air -1 scoreboard players set {1} {2} {3}".format(sel, valSel, _scoreName, 10));
 }
 
 exports._fs_uint8 = function(fd, val, autoNewline)
@@ -27,12 +30,12 @@ exports._fs_uint8 = function(fd, val, autoNewline)
     var right = int();
 
     exports._fs_uint4(sel, left);
-    exports._fs_uint4(sel, right, 0, 0, 1);
-
-    command("tp {0} ~1 ~ ~".format(sel));
+    exports._fs_uint4(sel, right, 0, 0, 1, autoNewline);
 
     if(autoNewline)
-        command("execute {0} ~ ~ ~ detect ~ ~ ~ air -1 tp @e[type=ArmorStand,c=1] 1 ~ ~2".format(sel));
+        command("execute {0} ~ ~ ~ detect ~ ~ ~ air -1 tp @e[type=ArmorStand,c=1] 0 ~ ~2".format(sel));
+
+    command("tp {0} ~1 ~ ~".format(sel));
 
     left.multiplicate(16);
     left.add(right);
