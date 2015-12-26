@@ -59,7 +59,7 @@ function shell()
 end
 
 function help(args)
-    terminal_static_writeln("McComputer version 0.0\nCommands: help, echo, cat, pwd")
+    terminal_static_writeln("Commands: help, echo, cat, pwd")
 end
 
 function echo(args)
