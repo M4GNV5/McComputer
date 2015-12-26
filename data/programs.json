@@ -29,5 +29,10 @@
     "cd": {
         "file": "programs/fileutils.lua",
         "function": "no_directories"
+    },
+    "random": {
+        "file": "programs/random.lua",
+        "function": "random",
+        "args": true
     }
 }
