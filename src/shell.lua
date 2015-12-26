@@ -25,6 +25,15 @@ function shell()
 
         local program, args = strsplit(input, charCode(" "))
 
-        shell_launch(program, args)
+        local exitcode = shell_launch(program, args)
+
+        import("chat")
+        tellraw("exitcode = ", exitcode)
+
+        if exitcode == -1 then
+            printf("Unknown command %s\n", program)
+        elseif exitcode ~= 0 then
+            printf("Program exited with code %d\n", exitcode)
+        end
     until false
 end
