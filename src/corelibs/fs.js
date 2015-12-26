@@ -30,15 +30,15 @@ exports.fcount = function()
 
 exports._fs_setpos = function(fd, line, column)
 {
-    var sel = exports.resolve_fd(fd);
+    var sel = exports._fs_resolve_fd(fd);
     command("execute {0} ~ ~ ~ tp {0} @e[type=ArmorStand,tag=file,c=1]".format(sel));
     scoreTp(sel, line, 12, 0, 0, 2);
     scoreTp(sel, column, 40, 1, 0, 0);
 }
 
-exports._fs_uint4 = function(fd, val, offsetX, offsetY, offsetZ, autoNewline)
+exports._fs_read_uint4 = function(fd, val, offsetX, offsetY, offsetZ, autoNewline)
 {
-    var sel = exports.resolve_fd(fd);
+    var sel = exports._fs_resolve_fd(fd);
 
     offsetX = "~" + (offsetX || "");
     offsetY = "~" + (offsetY || "");
@@ -57,14 +57,14 @@ exports._fs_uint4 = function(fd, val, offsetX, offsetY, offsetZ, autoNewline)
         command("execute {0} ~ ~ ~ detect ~ ~ ~ air -1 scoreboard players set {1} {2} {3}".format(sel, valSel, _scoreName, 10));
 }
 
-exports._fs_uint8 = function(fd, val, autoNewline)
+exports._fs_read_uint8 = function(fd, val, autoNewline)
 {
-    var sel = exports.resolve_fd(fd);
+    var sel = exports._fs_resolve_fd(fd);
     var left = int();
     var right = int();
 
-    exports._fs_uint4(sel, left);
-    exports._fs_uint4(sel, right, 0, 0, 1, autoNewline);
+    exports._fs_read_uint4(sel, left);
+    exports._fs_read_uint4(sel, right, 0, 0, 1, autoNewline);
 
     if(autoNewline)
         command("execute {0} ~ ~ ~ detect ~ ~ ~ air -1 tp @e[type=ArmorStand,c=1] 0 ~ ~2".format(sel));
@@ -78,7 +78,7 @@ exports._fs_uint8 = function(fd, val, autoNewline)
 
 exports._fs_write_uint4 = function(fd, val, offsetX, offsetY, offsetZ)
 {
-    var sel = exports.resolve_fd(fd);
+    var sel = exports._fs_resolve_fd(fd);
 
     offsetX = "~" + (offsetX || "");
     offsetY = "~" + (offsetY || "");
@@ -100,7 +100,7 @@ exports._fs_write_uint4 = function(fd, val, offsetX, offsetY, offsetZ)
 
 exports._fs_write_uint8 = function(fd, val)
 {
-    var sel = exports.resolve_fd(fd);
+    var sel = exports._fs_resolve_fd(fd);
     var left = int(val);
     var right = int(val);
     left.divide(16);
@@ -116,7 +116,7 @@ exports._fs_write_uint8 = function(fd, val)
     command("kill @e[type=ArmorStand,tag=fwrite]");
 }
 
-exports.resolve_fd = function(fd)
+exports._fs_resolve_fd = function(fd)
 {
     if(typeof fd == "string")
     {

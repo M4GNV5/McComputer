@@ -44,13 +44,13 @@ function fopen_name(name)
         local curr = name[i]
         local left, right = curr / 16, curr % 16
 
-        _fs_uint4("@e[type=ArmorStand,tag=fopen]", selfScore)
+        _fs_read_uint4("@e[type=ArmorStand,tag=fopen]", selfScore)
         command("execute @e[type=ArmorStand,tag=fopen] ~ ~ ~ " ..
             "scoreboard players operation @e[type=ArmorStand,tag=fopen,c=1] "..OBJECTIVE_NAME.." -= "..js_eval("left.name").." "..OBJECTIVE_NAME)
         command("kill @e[type=ArmorStand,tag=fopen,score_" .. OBJECTIVE_NAME .. "_min=1]")
         command("kill @e[type=ArmorStand,tag=fopen,score_" .. OBJECTIVE_NAME .. "=-1]")
 
-        _fs_uint4("@e[type=ArmorStand,tag=fopen]", selfScore, 0, 0, 1)
+        _fs_read_uint4("@e[type=ArmorStand,tag=fopen]", selfScore, 0, 0, 1)
         command("execute @e[type=ArmorStand,tag=fopen] ~ ~ ~ " ..
             "scoreboard players operation @e[type=ArmorStand,tag=fopen,c=1] "..OBJECTIVE_NAME.." -= "..js_eval("right.name").." "..OBJECTIVE_NAME)
         command("kill @e[type=ArmorStand,tag=fopen,score_" .. OBJECTIVE_NAME .. "_min=1]")
@@ -75,7 +75,7 @@ function fopen_name(name)
 end
 
 function fclose(fd)
-    command("kill " + resolve_fd(fd))
+    command("kill " + _fs_resolve_fd(fd))
 end
 
 function fcreate(name)
@@ -99,7 +99,7 @@ end
 
 function fgetc(fd)
     local val = 0
-    _fs_uint8(fd, val, true)
+    _fs_read_uint8(fd, val, true)
     return val
 end
 
