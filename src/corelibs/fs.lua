@@ -18,7 +18,6 @@ local currFd = 0
 function fopen_id(id)
     command("summon ArmorStand 1 10 5 {Tags:[\"fopen\"],NoGravity:true}")
 
-    command("setblock ~ ~1 ~ sponge")
     scoreTp("@e[type=ArmorStand,tag=fopen]", id, 64, 0, 3, 0)
 
     if "/execute @e[type=ArmorStand,tag=fopen] ~ ~ ~ testforblock ~ ~ ~ wool" then
@@ -79,7 +78,6 @@ function fclose(fd)
 end
 
 function fcreate(name)
-    command("setblock ~ ~1 ~ sponge")
     command("execute @e[type=ArmorStand,tag=fs] ~ ~ ~ summon ArmorStand ~ ~ ~ {Tags:[\"fcreate\"],NoGravity:true}")
     command("execute @e[type=ArmorStand,tag=fcreate] ~ ~ ~ summon ArmorStand ~ ~ ~ {Tags:[\"file\"],NoGravity:true}")
     command("tp @e[type=ArmorStand,tag=fs] ~ ~3 ~")
