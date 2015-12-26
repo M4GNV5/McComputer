@@ -37,19 +37,18 @@ end
 function write(args)
     local file, content = strsplit(args, charCode(" "))
 
-    printf("Opening file %s\n", file)
-
     local fd = fopen(file)
     if fd == 0 then
-        printf("Error: could not open file\n")
-    else
-        printf("Writing content...\n")
-        for i = 1, #content do
-            fwrite(fd, content[i])
-        end
-        fwrite(fd, 0)
-        fclose(fd)
+        printf("Creating file...\n")
+        fd = fcreate(file)
     end
+
+    printf("Writing content...\n")
+    for i = 1, #content do
+        fwrite(fd, content[i])
+    end
+    fwrite(fd, 0)
+    fclose(fd)
 end
 
 function no_directories()
