@@ -24,25 +24,29 @@ exports.terminal_static_write = function(s)
     for(var i = 0; i < lines.length; i++)
     {
         var line = lines[i];
+        exports.terminal_static_free(line.length);
         for(var ii = 0; ii < line.length; ii++)
         {
             var tag = bannertag(line[ii]);
-            command("execute {0} ~ ~ ~ setblock ~-{1} ~-{2} ~ wall_banner 2 replace {3}"
-                .format(selector, ii, i * 2, tag));
+            command("execute {0} ~ ~ ~ setblock ~-{1} ~ ~ wall_banner 2 replace {2}"
+                .format(selector, ii, tag));
         }
-    }
 
-    var x = 40 - lines[lines.length - 1].length;
-    var y = lines.length * 2 - 2;
-    command("tp {0} {1} ~-{2} ~".format(selector, x, y));
+        if(i + 1 < lines.length)
+            command("tp {0} 40 ~-2 ~".format(selector));
+        else
+            command("tp {0} {1} ~ ~".format(selector, 40 - lines[i].length));
+    }
 }
 
 exports.terminal_static_free = function(length)
 {
-    if(length < 1)
-        return;
+    if(length > 0)
+        command("execute {0} ~ ~ ~ detect ~-{1} ~ ~1 air -1 tp {0} 40 ~-2 ~".format(selector, length - 1));
 
-    command("execute {0} ~ ~ ~ detect ~-{1} ~ ~1 air -1 tp {0} 40 ~-2 ~".format(selector, length - 1));
+    command("execute {0} ~ ~ ~ detect ~ ~ ~1 air -1 clone 0 10 0 40 32 0 0 12 0 replace force".format(selector));
+    command("execute {0} ~ ~ ~ detect ~ ~ ~1 air -1 fill 0 9 0 40 10 0 air".format(selector));
+    command("execute {0} ~ ~ ~ detect ~ ~ ~1 air -1 tp {0} 40 10 0".format(selector));
 }
 
 exports._terminal_write = function(val)
