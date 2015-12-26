@@ -31,7 +31,7 @@ exports.fcount = function()
 exports._fs_setpos = function(fd, line, column)
 {
     var sel = exports.resolve_fd(fd);
-    command("execute {0} ~ ~ ~ tp {0} @e[type=ArmorStand,tag=file]".format(sel));
+    command("execute {0} ~ ~ ~ tp {0} @e[type=ArmorStand,tag=file,c=1]".format(sel));
     scoreTp(sel, line, 12, 0, 0, 2);
     scoreTp(sel, column, 40, 1, 0, 0);
 }

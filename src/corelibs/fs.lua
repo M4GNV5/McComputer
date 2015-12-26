@@ -78,6 +78,25 @@ function fclose(fd)
     command("kill " + resolve_fd(fd))
 end
 
+function fcreate(name)
+    command("setblock ~ ~1 ~ sponge")
+    command("execute @e[type=ArmorStand,tag=fs] ~ ~ ~ summon ArmorStand ~ ~ ~ {Tags:[\"fcreate\"],NoGravity:true}")
+    command("execute @e[type=ArmorStand,tag=fcreate] ~ ~ ~ summon ArmorStand ~ ~ ~ {Tags:[\"file\"],NoGravity:true}")
+    command("tp @e[type=ArmorStand,tag=fs] ~ ~3 ~")
+
+    currFd = currFd + 1
+    local fd = score("@e[type=ArmorStand,tag=fcreate]", OBJECTIVE_NAME)
+    fd = currFd
+    command("entitydata @e[type=ArmorStand,tag=fcreate] {Tags:[\"fd\"]}")
+
+    for i = 1, #name do
+        fwrite(currFd, name[i])
+    end
+    fsetpos(currFd, 1, 0)
+
+    return currFd
+end
+
 function fgetc(fd)
     local val = 0
     _fs_uint8(fd, val, true)
