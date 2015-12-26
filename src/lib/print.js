@@ -3,6 +3,7 @@ var swrite = scope.get("terminal_static_write");
 var swriteln = scope.get("terminal_static_writeln");
 
 var print_str = scope.get("print_str");
+var print_float = scope.get("print_float");
 var print_int = scope.get("print_int");
 var print_bool = scope.get("print_bool");
 
@@ -15,6 +16,7 @@ exports.printf = function(msg)
 {
     var printFormats = {
         "s": print_str,
+        "f": print_float,
         "d": print_int,
         "i": print_int,
         "b": print_bool,

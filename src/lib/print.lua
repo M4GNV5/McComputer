@@ -7,7 +7,20 @@ function print_str(str) --print char table
     end
 end
 
---todo print float
+function print_float(val) -- print float
+    local base = js_eval("val.base")
+    local left, right = base / 100, base % 100
+
+    print_int(left)
+
+    if right < 0 then
+        right = -right
+    end
+
+    print_char(charCode("."))
+    print_char(right / 10 + charCode("0"))
+    print_char(right % 10 + charCode("0"))
+end
 
 function print_int(val) --print integer
     if val < 0 then
