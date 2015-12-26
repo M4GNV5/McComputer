@@ -34,5 +34,13 @@
         "file": "programs/random.lua",
         "function": "random",
         "args": true
+    },
+    "shutdown": {
+        "file": "programs/oscontrol.lua",
+        "function": "shutdown"
+    },
+    "reboot": {
+        "file": "programs/oscontrol.lua",
+        "function": "reboot"
     }
 }
