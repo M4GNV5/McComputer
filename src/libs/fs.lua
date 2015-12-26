@@ -52,7 +52,6 @@ function fclose(fd)
 end
 
 function fgetc(fd)
-    command("setblock ~ ~1 ~ sponge")
     local val = 0
     _fs_uint8(fd, val, true)
     return val
