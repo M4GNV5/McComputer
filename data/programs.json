@@ -1,0 +1,33 @@
+{
+    "help": {
+        "file": "programs/help.lua",
+        "function": "help"
+    },
+    "echo": {
+        "file": "programs/echo.lua",
+        "function": "echo",
+        "args": true
+    },
+    "ls": {
+        "file": "programs/fileutils.lua",
+        "function": "ls"
+    },
+    "cat": {
+        "file": "programs/fileutils.lua",
+        "function": "cat",
+        "args": true
+    },
+    "write": {
+        "file": "programs/fileutils.lua",
+        "function": "write",
+        "args": true
+    },
+    "pwd": {
+        "file": "programs/fileutils.lua",
+        "function": "no_directories"
+    },
+    "cd": {
+        "file": "programs/fileutils.lua",
+        "function": "no_directories"
+    }
+}

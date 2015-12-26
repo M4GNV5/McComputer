@@ -1,6 +1,8 @@
-import("./libs/terminal.lua")
-import("./libs/fs.lua")
-import("./programs.lua")
+import("./corelibs/terminal.lua")
+import("./corelibs/fs.lua")
+import("./lib/include.js")
+
+import("./shell.lua")
 
 fs_init()
 terminal_init()
