@@ -46,5 +46,9 @@
     "hcf": {
         "file": "programs/useless.lua",
         "function": "hcf"
+    },
+    "fortune": {
+        "file": "programs/useless.lua",
+        "function": "fortune"
     }
 }
