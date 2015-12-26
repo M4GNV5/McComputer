@@ -14,7 +14,7 @@ exports.fopen = function(file)
     if(typeof file == "number" || file.constructor.name == "Integer")
         return fopen_id(file);
     else if(typeof file == "string")
-        return fopen_name(strTable(file));
+        return fopen_name(strTable(file)[0]);
     else if(file instanceof Array || file.constructor.name == "Table")
         return fopen_name(file);
 
