@@ -5,14 +5,16 @@ function ls()
         local fd = fopen(i)
 
         if fd then
+            local c = fgetc(fd)
             repeat
-                local c = fgetc(fd)
                 printf("%c", c)
+                c = fgetc(fd)
             until c == charCode("\n")
-
             fclose(fd)
         end
+        printf(" ")
     end
+    printf("\n")
 end
 
 function cat(args)
