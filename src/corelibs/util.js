@@ -15,13 +15,14 @@ exports.strTable = function(s)
     return [val];
 }
 
-exports.strHash = function(s)
+exports.static_strhash = function(s)
 {
-    s = s.toUpperCase()
-    var val1 = s.charCodeAt(0) << 16 || 0;
-    var val2 = s.charCodeAt(1) << 8 || 0;
-    var val3 = s.charCodeAt(2) || 0;
-    return val1 + val2 + val3;
+    s = s.toUpperCase();
+    var val0 = s.charCodeAt(0) << 24 || 0;
+    var val1 = s.charCodeAt(1) << 16 || 0;
+    var val2 = s.charCodeAt(2) << 8 || 0;
+    var val3 = s.charCodeAt(3) || 0;
+    return val0 + val1 + val2 + val3;
 }
 
 exports.scoreTp = function(sel, val, max, x, y, z)

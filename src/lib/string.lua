@@ -40,11 +40,6 @@ function strcat(str1, str2)
     end
 end
 
-function strslice(str, start, stop)
-    local result = {}
-    for i = start, stop do
-        result[#result + 1] = str[i]
-    end
-
-    return result
+function strhash(str)
+    return str[1] * (2 ^ 24) + str[2] * (2 ^ 16) + str[3] * (2 ^ 8) + str[4]
 end

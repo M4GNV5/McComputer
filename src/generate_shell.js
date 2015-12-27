@@ -1,13 +1,12 @@
 var fs = require("fs");
 var programs = require("./../data/programs.json");
-var strHash = require("./corelibs/util.js").strHash;
+var strHash = require("./corelibs/util.js").static_strhash;
 
 var base = "{0}\n\n" +
 "function shell_launch(program, args)\n"+
-"local proghash1 = program[1] * (2 ^ 16) + program[2] * (2 ^ 8) + program[3]\n" +
-"local proghash2 = program[4] * (2 ^ 16) + program[5] * (2 ^ 8) + program[6]\n" +
+"local proghash = strhash(program)\n" +
 "local exitcode = 0\n" +
-"\n" +
+"printf('hash: %d', proghash)\n" +
 "{1}\n" +
 "else\n" +
 "\texitcode = -1\n" +
@@ -25,9 +24,8 @@ for(var key in programs)
         files.push(prog.file);
 
     var arg = prog.args ? "args" : "";
-    var hash1 = strHash(key.substr(0, 3));
-    var hash2 = strHash(key.substr(3, 3));
-    var lCase = "elseif proghash1 == {0} and proghash2 == {1} then\n\texitcode = int({2}({3}))".format(hash1, hash2, prog.function, arg);
+    var hash = strHash(key.substr(0, 3));
+    var lCase = "elseif proghash == {0} then\n\texitcode = int({1}({2}))".format(hash, prog.function, arg);
     launchCases.push(lCase);
 }
 
