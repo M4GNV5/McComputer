@@ -4,7 +4,7 @@ var tmpScoreName = "MoonCraftTmp";
 var int = scope.get("int");
 var util = require("./util.js");
 var scoreTp = util.scoreTp;
-var strTable = util.strTable;
+var strTable = util.str;
 
 var fopen_id = scope.get("fopen_id");
 var fopen_name = scope.get("fopen_name");

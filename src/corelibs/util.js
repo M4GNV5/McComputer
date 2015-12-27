@@ -6,7 +6,7 @@ exports.charCode = function(s)
     return s.charCodeAt(0);
 }
 
-exports.strTable = function(s)
+exports.str = function(s)
 {
     s = (s || "").toUpperCase();
     var val = [];
