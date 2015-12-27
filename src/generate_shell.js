@@ -6,7 +6,7 @@ var base = "{0}\n\n" +
 "function shell_launch(program, args)\n"+
 "local proghash = strhash(program)\n" +
 "local exitcode = 0\n" +
-"printf('hash: %d', proghash)\n" +
+"\n" +
 "{1}\n" +
 "else\n" +
 "\texitcode = -1\n" +
