@@ -24,7 +24,7 @@ for(var key in programs)
         files.push(prog.file);
 
     var arg = prog.args ? "args" : "";
-    var hash = strHash(key.substr(0, 3));
+    var hash = strHash(key);
     var lCase = "elseif proghash == {0} then\n\texitcode = int({1}({2}))".format(hash, prog.function, arg);
     launchCases.push(lCase);
 }
