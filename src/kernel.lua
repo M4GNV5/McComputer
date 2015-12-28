@@ -6,4 +6,7 @@ fs_init()
 terminal_init()
 
 terminal_static_writeln("McComputer v0.0")
---shell()
+
+if not fexec(str("shell")) then
+    terminal_static_writeln("Could not start shell :O")
+end

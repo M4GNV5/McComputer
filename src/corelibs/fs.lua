@@ -108,3 +108,15 @@ function fcreate(name : table) : int
 
     return currFd
 end
+
+function fexec(name : table) : bool
+    local fd = fopen_name(name)
+
+    if fd == 0 then
+        return false
+    end
+
+    command("execute " .. _fs_resolve_fd(fd) .. " ~ ~ ~ setblock ~ ~1 ~ command_block 0 replace {Command:\"setblock ~ ~ ~ air\",auto:1b}")
+    fclose(fd)
+    return true
+end

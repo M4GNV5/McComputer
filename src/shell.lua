@@ -1,21 +1,36 @@
 include("stdio")
 include("string")
-include("config")
-
-import("./generate_shell.js")
-import("./shell_launch.lua")
 import("time")
 
 local printTime = false
 local printErrorCode = false
+local args = {}
+local starttime = 0
+local exitcode = 0
 
-function shell()
-    local lastInput = {}
+function shell_args() : table
+    return args
+end
 
+function exit(code : int) : void
+    if exitcode ~= 0 and printErrorCode then
+        printf("Program exited with code %d\n", exitcode)
+    elseif printTime then
+        local diff = 0.0
+        diff = gametime() - starttime
+        diff = diff / 20
+        printf("execution took %f seconds\n", diff)
+    end
+
+    fexec(str("shell"))
+end
+
+function shell_reload() : void
     printf("Loading shell config...\n")
-    local config = config_parse(str("shell.conf"))
-    printTime = config[static_strhash("time")]
-    printErrorCode = config[static_strhash("code")]
+end
+
+local function shell() : void
+    local lastInput = {}
 
     repeat
         printf(">")
@@ -35,8 +50,6 @@ function shell()
             printf("%c", c)
         until c == charCode("\n")
 
-        local starttime = gametime()
-
         if #input == 1 and input[1] == charCode(".") then
             input = lastInput
         else
@@ -44,17 +57,15 @@ function shell()
         end
 
         local program, args = strsplit(input, charCode(" "))
-        local exitcode = shell_launch(program, args)
 
-        if exitcode == -1 then
-            printf("Unknown command %s\n", program)
-        elseif exitcode ~= 0 and printErrorCode then
-            printf("Program exited with code %d\n", exitcode)
-        elseif printTime then
-            local diff = 0.0
-            diff = gametime() - starttime
-            diff = diff / 20
-            printf("execution took %f seconds\n", diff)
+        starttime = gametime()
+
+        if fexec(program) then
+            break
+        else
+            printf("unknown command %s", program)
         end
     until false
 end
+
+shell()
