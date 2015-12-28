@@ -12,5 +12,9 @@
             "./src/lib/conversion.lua",
             "./src/lib/string.lua"
         ]
+    },
+    {
+        "name": "libdict",
+        "files": [ "./src/lib/dictionary.lua" ]
     }
 ]

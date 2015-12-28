@@ -1,8 +1,27 @@
+include("stdio")
 include("string")
 
 -- {keylen, vallen, key1, key2, key3, val1, val2, val3}
 
-function dict_get(dict, key)
+function dict_find(dict : table, needle : table) : int, int, int
+    local i = 1
+    repeat
+        local keylen, vallen = dict[i], dict[i + 1]
+        local keypos = i + 2
+        local key = dict
+        table_slice(key, keypos, keypos + keylen - 1)
+
+        if strcmp(key, needle) then
+            return i, keylen, vallen
+        end
+
+        i = i + keylen + vallen + 2
+    until i > #dict
+
+    return -1, 0, 0
+end
+
+function dict_get(dict : table, key : table) : table
     local i, keylen, vallen = dict_find(dict, key)
 
     if i < 0 then
@@ -14,7 +33,7 @@ function dict_get(dict, key)
     return val
 end
 
-function dict_set(dict, key, val)
+function dict_set(dict : table, key : table, val : table) : table
     local i, keylen, vallen = dict_find(dict, key)
     local newkeylen, newvallen = #key, #val
     if i < 0 then
@@ -50,25 +69,7 @@ function dict_set(dict, key, val)
     return dict
 end
 
-function dict_find(dict, needle)
-    local i = 1
-    repeat
-        local keylen, vallen = dict[i], dict[i + 1]
-        local keypos = i + 2
-        local key = dict
-        table_slice(key, keypos, keypos + keylen - 1)
-
-        if strcmp(key, needle) then
-            return i, keylen, vallen
-        end
-
-        i = i + keylen + vallen + 2
-    until i > #dict
-
-    return -1, 0, 0
-end
-
-function dict_dump(dict)
+function dict_dump(dict : table): void
     local i = 1
     repeat
         local keylen, vallen = dict[i], dict[i + 1]
