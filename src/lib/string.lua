@@ -43,3 +43,12 @@ end
 function strhash(str)
     return str[1] * (2 ^ 24) + str[2] * (2 ^ 16) + str[3] * (2 ^ 8) + str[4]
 end
+
+function strunhash(val)
+    local str = {}
+    str[1] = val / (2 ^ 24)
+    str[2] = val / (2 ^ 16) % (2 ^ 8)
+    str[3] = val / (2 ^ 8) % (2 ^ 8)
+    str[4] = val % (2 ^ 8)
+    return str
+end
