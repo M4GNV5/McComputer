@@ -2,7 +2,12 @@
     {
         "name": "kernel",
         "y": 4,
-        "files": [ "./src/kernel.lua" ]
+        "files": [
+            "./src/kernel.lua",
+            "./src/corelibs/fs.lua",
+            "./src/corelibs/keyboard.lua",
+            "./src/corelibs/terminal.lua"
+        ]
     },
     {
         "name": "liblua",
@@ -15,6 +20,14 @@
     },
     {
         "name": "libdict",
-        "files": [ "./src/lib/dictionary.lua" ]
+        "files": [
+            "./src/lib/dictionary.lua"
+        ]
+    },
+    {
+        "name": "shell",
+        "files": [
+            "./src/shell.lua"
+        ]
     }
 ]

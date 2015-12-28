@@ -4,5 +4,8 @@
 # auto generated .d.lua files
 /include
 
+# compile script cache
+/compile-cache.json
+
 # auto generated shell_launch file
 /src/shell_launch.lua
