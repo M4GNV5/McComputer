@@ -1,4 +1,4 @@
-import("./../corelibs/keyboard.lua")
+include("kernel")
 
 --TODO scanf
 

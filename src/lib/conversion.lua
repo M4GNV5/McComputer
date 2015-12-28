@@ -1,4 +1,4 @@
-function itoa(val)
+function itoa(val : int) : table
     local str = {}
     local neg = false
 
@@ -21,7 +21,7 @@ function itoa(val)
     return str
 end
 
-function atoi(str)
+function atoi(str : table) : int
     local val = 0
     local neg = false
 
@@ -40,7 +40,7 @@ function atoi(str)
     return val
 end
 
-function atof(str)
+function atof(str : table) : float
     local val = 0.0
     local neg = false
 
@@ -62,7 +62,7 @@ function atof(str)
     return val
 end
 
-function ftoa(val)
+function ftoa(val : float) : table
     local base = js_eval("val.base")
     local left, right = base / 100, base % 100
 

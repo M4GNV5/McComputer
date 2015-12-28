@@ -1,8 +1,8 @@
-import("./util.js")
-
 -- fs at 1 10 5
 
-function fs_init()
+import("./fs.js")
+
+function fs_init() : void
     command("kill @e[type=ArmorStand,tag=fs]")
     command("kill @e[type=ArmorStand,tag=file]")
     command("summon ArmorStand 1 10 5 {Tags:[\"fs\"],NoGravity:true}")
@@ -15,7 +15,7 @@ end
 
 local currFd = 0
 
-function fopen_id(id)
+function fopen_id(id : int) : int
     command("summon ArmorStand 1 10 5 {Tags:[\"fopen\"],NoGravity:true}")
 
     scoreTp("@e[type=ArmorStand,tag=fopen]", id, 64, 0, 3, 0)
@@ -31,7 +31,7 @@ function fopen_id(id)
     end
 end
 
-function fopen_name(name)
+function fopen_name(name : table) : int
     command("execute @e[type=ArmorStand,tag=file] ~ ~ ~ summon ArmorStand ~ ~ ~ {Tags:[\"fopen\"],NoGravity:true}")
 
     name[#name + 1] = 0
@@ -73,11 +73,25 @@ function fopen_name(name)
     end
 end
 
-function fclose(fd)
+function fclose(fd : int) : void
     command("kill " + _fs_resolve_fd(fd))
 end
 
-function fcreate(name)
+function fgetc(fd : int) : int
+    local val = 0
+    _fs_read_uint8(fd, val, true)
+    return val
+end
+
+function fwrite(fd : int, char : int) : void
+    _fs_write_uint8(fd, char)
+end
+
+function fsetpos(fd : int, line : int, column : int) : void
+    _fs_setpos(fd, line, column)
+end
+
+function fcreate(name : table) : int
     command("execute @e[type=ArmorStand,tag=fs] ~ ~ ~ summon ArmorStand ~ ~ ~ {Tags:[\"fcreate\"],NoGravity:true}")
     command("execute @e[type=ArmorStand,tag=fcreate] ~ ~ ~ summon ArmorStand ~ ~ ~ {Tags:[\"file\"],NoGravity:true}")
     command("tp @e[type=ArmorStand,tag=fs] ~ ~3 ~")
@@ -94,19 +108,3 @@ function fcreate(name)
 
     return currFd
 end
-
-function fgetc(fd)
-    local val = 0
-    _fs_read_uint8(fd, val, true)
-    return val
-end
-
-function fwrite(fd, char)
-    _fs_write_uint8(fd, char)
-end
-
-function fsetpos(fd, line, column)
-    _fs_setpos(fd, line, column)
-end
-
-import("./fs.js")

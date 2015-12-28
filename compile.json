@@ -1,0 +1,16 @@
+[
+    {
+        "name": "kernel",
+        "y": 4,
+        "files": [ "./src/kernel.lua" ]
+    },
+    {
+        "name": "liblua",
+        "files": [
+            "./src/lib/input.lua",
+            "./src/lib/print.lua",
+            "./src/lib/conversion.lua",
+            "./src/lib/string.lua"
+        ]
+    }
+]

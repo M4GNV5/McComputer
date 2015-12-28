@@ -2,11 +2,6 @@ var write = scope.get("terminal_write");
 var swrite = scope.get("terminal_static_write");
 var swriteln = scope.get("terminal_static_writeln");
 
-var print_str = scope.get("print_str");
-var print_float = scope.get("print_float");
-var print_int = scope.get("print_int");
-var print_bool = scope.get("print_bool");
-
 exports.print_char = function(c)
 {
     write(c);
@@ -15,11 +10,11 @@ exports.print_char = function(c)
 exports.printf = function(msg)
 {
     var printFormats = {
-        "s": print_str,
-        "f": print_float,
-        "d": print_int,
-        "i": print_int,
-        "b": print_bool,
+        "s": scope.get("print_str"),
+        "f": scope.get("print_float"),
+        "d": scope.get("print_int"),
+        "i": scope.get("print_int"),
+        "b": scope.get("print_bool"),
         "c": exports.print_char
     };
 

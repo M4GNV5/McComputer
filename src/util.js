@@ -1,5 +1,25 @@
+var path = require("path");
+var fs = require("fs");
+
 var score = scope.get("score");
 var scoreName = scope.get("OBJECTIVE_NAME");
+
+var luaImport = scope.get("import");
+var includes = require("./includes.json");
+
+exports.include = function(name)
+{
+    if(!includes.hasOwnProperty(name))
+        throw "Cannot include " + name;
+
+    var files = includes[name];
+
+    for(var i = 0; i < files.length; i++)
+    {
+        var file = path.resolve(path.join(__dirname, files[i]));
+        luaImport(file);
+    }
+}
 
 exports.charCode = function(s)
 {

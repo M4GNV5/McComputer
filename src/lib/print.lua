@@ -1,28 +1,14 @@
-import("./../corelibs/terminal.lua")
-import("./../corelibs/util.js")
+include("kernel")
+import("./../corelibs/terminal.js")
+import("./print.js")
 
-function print_str(str) --print char table
+function print_str(str : table) : void --print char table
     for i = 1, #str do
         terminal_write(str[i])
     end
 end
 
-function print_float(val) -- print float
-    local base = js_eval("val.base")
-    local left, right = base / 100, base % 100
-
-    print_int(left)
-
-    if right < 0 then
-        right = -right
-    end
-
-    print_char(charCode("."))
-    print_char(right / 10 + charCode("0"))
-    print_char(right % 10 + charCode("0"))
-end
-
-function print_int(val) --print integer
+function print_int(val : int) : void --print integer
     if val < 0 then
         terminal_static_write("-")
         val = -val
@@ -42,10 +28,25 @@ function print_int(val) --print integer
     end
 end
 
+function print_float(val : float) : void -- print float
+    local base = js_eval("val.base")
+    local left, right = base / 100, base % 100
+
+    print_int(left)
+
+    if right < 0 then
+        right = -right
+    end
+
+    print_char(charCode("."))
+    print_char(right / 10 + charCode("0"))
+    print_char(right % 10 + charCode("0"))
+end
+
 --print char in print.js
 
-function print_bool(bool) --print bool
-    if bool then
+function print_bool(val : bool) : void --print bool
+    if val then
         terminal_static_write("true")
         return
     else
@@ -53,5 +54,3 @@ function print_bool(bool) --print bool
         return
     end
 end
-
-import("./print.js")

@@ -1,5 +1,8 @@
 # MoonCraft config with rcon ip, password etc.
-/src/config.json
+/config.json
+
+# auto generated .d.lua files
+/include
 
 # auto generated shell_launch file
 /src/shell_launch.lua

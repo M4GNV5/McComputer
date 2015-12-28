@@ -1,8 +1,7 @@
 {
     "cmd": "node",
     "args": [
-        "~/Documents/Github/MoonCraft/src/main.js",
-        "kernel.lua"
+        "compile.js"
     ],
-    "cwd": "{PROJECT_PATH}/src"
+    "cwd": "{PROJECT_PATH}"
 }

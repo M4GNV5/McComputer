@@ -1,4 +1,4 @@
-function strsplit(str, splitter)
+function strsplit(str : table, splitter : int) : table, table
     local split = {}
     repeat
         local c = str[1]
@@ -10,7 +10,7 @@ function strsplit(str, splitter)
     return split, str
 end
 
-function strcmp(str1, str2)
+function strcmp(str1 : table, str2 : table) : bool
     if #str1 ~= #str2 then
         return false
     end
@@ -27,7 +27,7 @@ function strcmp(str1, str2)
     return true
 end
 
-function strcat(str1, str2)
+function strcat(str1 : table, str2 : table) : table
     if #str1 > #str2 then
         for i = 1, #str2 do
             str1[#str1 + 1] = str2[i]
@@ -40,11 +40,11 @@ function strcat(str1, str2)
     end
 end
 
-function strhash(str)
+function strhash(str : table) : int
     return str[1] * (2 ^ 24) + str[2] * (2 ^ 16) + str[3] * (2 ^ 8) + str[4]
 end
 
-function strunhash(val)
+function strunhash(val : int) : table
     local str = {}
     str[1] = val / (2 ^ 24)
     str[2] = val / (2 ^ 16) % (2 ^ 8)

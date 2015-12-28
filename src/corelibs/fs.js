@@ -2,15 +2,15 @@ var scoreName = scope.get("OBJECTIVE_NAME");
 var tmpScoreName = "MoonCraftTmp";
 
 var int = scope.get("int");
-var util = require("./util.js");
+var util = require("./../util.js");
 var scoreTp = util.scoreTp;
 var strTable = util.str;
 
-var fopen_id = scope.get("fopen_id");
-var fopen_name = scope.get("fopen_name");
-
 exports.fopen = function(file)
 {
+    var fopen_id = scope.get("fopen_id");
+    var fopen_name = scope.get("fopen_name");
+
     if(typeof file == "number" || file.constructor.name == "Integer")
         return fopen_id(file);
     else if(typeof file == "string")
