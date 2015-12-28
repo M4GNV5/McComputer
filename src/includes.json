@@ -1,6 +1,6 @@
 {
     "kernel": ["../include/kernel.d.lua"],
-    "stdio": ["../include/liblua.d.lua", "../include/kernel.d.lua", "corelibs/fs.js", "lib/print.js", "lib/input.js"],
+    "stdio": ["../include/liblua.d.lua", "../include/kernel.d.lua", "corelibs/terminal.js", "corelibs/fs.js", "lib/print.js", "lib/input.js"],
     "stdlib": ["../include/liblua.d.lua"],
     "string": ["../include/liblua.d.lua"]
 }
