@@ -1,4 +1,4 @@
-import("./util.js")
+import("./../util.js")
 include("shell")
 
 arguments = shell_args

@@ -84,7 +84,7 @@ function next(i)
 	}
 	else if(type == "program")
 	{
-		files = ["./src/program_head.lua"].concat(files, "./src/program_foot.lua");
+		files = ["./src/shell/program_head.lua"].concat(files, "./src/shell/program_foot.lua");
 		var exp = "./include/{0}.d.lua".format(name);
 		compile(1, y, 7, undefined, files, stuff[i].args, function()
 		{
@@ -181,6 +181,7 @@ function run(cmd, args, cb)
         if(code != 0)
 		{
 			fs.writeFileSync("./compile-cache.json", JSON.stringify(mtimeCache, undefined, 4));
+			rconOutput(blocks, []);
 			process.exit(code);
 		}
 

@@ -32,7 +32,7 @@
         "name": "shell",
         "type": "lib",
         "files": [
-            "./src/shell.lua"
+            "./src/shell/shell.lua"
         ]
     },
     {
