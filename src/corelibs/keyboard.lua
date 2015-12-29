@@ -2,8 +2,8 @@ import("chat")
 import("./keyboard.js")
 
 function keyboard_get() : int
-    val = 0
-    --command("gamerule sendCommandFeedback false")
+    local val = 0
+    command("gamerule sendCommandFeedback false")
     keyboard_show(val)
 
     repeat

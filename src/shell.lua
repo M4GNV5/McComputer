@@ -3,12 +3,8 @@ include("string")
 import("time")
 
 local printTime = false
-local args = {}
+shell_args = {}
 local starttime = 0
-
-function shell_get_args() : table
-    return args
-end
 
 local function shell() : void
     local lastInput = {}
@@ -18,7 +14,7 @@ local function shell() : void
 
         local input = {}
         repeat
-            c = getchar()
+            local c = getchar()
 
             if c == 8 then -- backspace
                 table_remove(input, #input)
@@ -38,7 +34,7 @@ local function shell() : void
         end
 
         local program = {}
-        program, args = strsplit(input, charCode(" "))
+        program, shell_args = strsplit(input, charCode(" "))
 
         starttime = gametime()
 
