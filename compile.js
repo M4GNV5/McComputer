@@ -95,8 +95,9 @@ function next(i)
 	}
 	else if(type == "text")
 	{
-		var content = fs.readFileSync(files[0]);
+		var content = fs.readFileSync(files[0]).toString();
 		createFile(name, content, 1, y, 5);
+		mtimeCache[name] = new Date().getTime();
 		next(i + 1);
 	}
 }
