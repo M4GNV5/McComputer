@@ -58,7 +58,7 @@ function next(i)
 		if(ii + 1 == files.length && mtime < lastCompile)
 		{
 			console.log("\n\nignoring {0}".format(name));
-			setTimeout(next.bind(undefined, i + 1), 1);
+			next(i + 1);
 			return;
 		}
 		else if(mtime < lastCompile)
@@ -75,20 +75,29 @@ function next(i)
 	{
 		files = ["./src/util.js"].concat(files);
 		var exp = "./include/{0}.d.lua".format(name);
-		compile(1, y, 7, exp, files, stuff[i].args, next.bind(undefined, i + 1));
+		compile(1, y, 7, exp, files, stuff[i].args, function()
+		{
+			mtimeCache[name] = new Date().getTime();
+			next(i + 1);
+		});
 		createFile(name, undefined, 1, y, 5);
 	}
 	else if(type == "program")
 	{
 		files = ["./src/program_head.lua"].concat(files, "./src/program_foot.lua");
 		var exp = "./include/{0}.d.lua".format(name);
-		compile(1, y, 7, exp, files, stuff[i].args, next.bind(undefined, i + 1));
+		compile(1, y, 7, exp, files, stuff[i].args, function()
+		{
+			mtimeCache[name] = new Date().getTime();
+			next(i + 1);
+		});
 		createFile(name, undefined, 1, y, 5);
 	}
 	else if(type == "text")
 	{
 		var content = fs.readFileSync(files[0]);
 		createFile(name, content, 1, y, 5);
+		next(i + 1);
 	}
 }
 
