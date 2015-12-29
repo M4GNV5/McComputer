@@ -1,13 +1,14 @@
 include("stdio")
-include("random")
+import("random")
+
+import("./scrapFortunes.js")
 
 local fd = fopen("fortunes.txt")
 if fd == 0 then
     printf("Fortune file not found :[\n")
-    return 1
 end
 
-local fortuneCount = 9
+local fortuneCount = 20
 local line = rand_fast()
 if line < 0 then
     line = -line
@@ -22,4 +23,3 @@ repeat
 until c == charCode("\n")
 
 fclose(fd)
-return 0

@@ -78,6 +78,20 @@
         ]
     },
     {
+        "name": "fortune",
+        "type": "program",
+        "files": [
+            "./programs/fortune/fortune.lua"
+        ]
+    },
+    {
+        "name": "fortunes.txt",
+        "type": "text",
+        "files": [
+            "./programs/fortune/fortunes.txt"
+        ]
+    },
+    {
         "name": "hcf",
         "type": "program",
         "files": [

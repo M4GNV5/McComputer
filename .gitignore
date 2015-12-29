@@ -9,3 +9,6 @@
 
 # auto generated shell_launch file
 /src/shell_launch.lua
+
+# auto generated fortunes.txt file
+/programs/fortune/fortunes.txt
