@@ -1,18 +1,16 @@
 include("stdio")
+import("chat")
 
 local count = fcount()
-
 for i = 0, count - 1 do
     local fd = fopen(i)
 
     if fd then
-        local c = fgetc(fd)
-        repeat
-            printf("%c", c)
-            c = fgetc(fd)
-        until c == charCode("\n")
+        local name = fgets(fd)
         fclose(fd)
+
+        printf("%s ", name)
     end
-    printf(" ")
 end
+
 printf("\n")

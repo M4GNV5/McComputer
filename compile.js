@@ -132,7 +132,7 @@ function createFile(name, content, x, y, z)
 		blocks.push({x: x, y: y, z: z, tagName: "wool", data: val});
 	}
 
-	var lines = [name];
+	var lines = [name + String.fromCharCode(0)];
 	if(content)
 		lines = lines.concat(content.split("\n"));
 

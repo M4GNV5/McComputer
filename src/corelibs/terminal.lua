@@ -26,3 +26,9 @@ function terminal_write(char : int) : void
         _terminal_write(char)
     end
 end
+
+function terminal_write_str(str : table) : void
+    for i = 1, #str do
+        _terminal_write(str[i])
+    end
+end

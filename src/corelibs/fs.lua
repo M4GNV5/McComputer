@@ -83,6 +83,18 @@ function fgetc(fd : int) : int
     return val
 end
 
+function fgets(fd : int) : table
+    local str = {}
+    repeat
+        local c = 0
+        _fs_read_uint8(fd, c, true)
+        str[#str + 1] = c
+    until c == 0
+
+    table_remove(str, #str)
+    return str
+end
+
 function fwrite(fd : int, char : int) : void
     _fs_write_uint8(fd, char)
 end

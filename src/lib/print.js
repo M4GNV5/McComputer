@@ -1,4 +1,5 @@
 var write = scope.get("terminal_write");
+var writestr = scope.get("terminal_write_str");
 var swrite = scope.get("terminal_static_write");
 var swriteln = scope.get("terminal_static_writeln");
 
@@ -7,10 +8,15 @@ exports.print_char = function(c)
     write(c);
 }
 
+exports.print_str = function(s)
+{
+    writestr(s);
+}
+
 exports.printf = function(msg)
 {
     var printFormats = {
-        "s": scope.get("print_str"),
+        "s": exports.print_str,
         "f": scope.get("print_float"),
         "d": scope.get("print_int"),
         "i": scope.get("print_int"),

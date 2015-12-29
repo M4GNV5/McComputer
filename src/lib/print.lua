@@ -2,12 +2,6 @@ include("kernel")
 import("./../corelibs/terminal.js")
 import("./print.js")
 
-function print_str(str : table) : void --print char table
-    for i = 1, #str do
-        terminal_write(str[i])
-    end
-end
-
 function print_int(val : int) : void --print integer
     if val < 0 then
         terminal_static_write("-")
