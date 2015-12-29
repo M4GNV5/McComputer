@@ -5,6 +5,7 @@ var supportedLetters = Object.keys(require("./../../data/letters.json"));
 var specialChars = {
     "ENTER": "\n".charCodeAt(0),
     "SPACE": " ".charCodeAt(0),
+    "TAB": "\t".charCodeAt(0),
     "BACKSPACE": 8
 }
 
@@ -16,7 +17,7 @@ var scoreName = scope.get("OBJECTIVE_NAME");
 
 exports.keyboard_show = function(val)
 {
-    var cmd = "/scoreboard players set {0} {1} ".format(val.name, scoreName);
+    var cmd = "/trigger {0} set ".format(val.scoreName);
     var lines = layout.split("\n");
 
     tellraw((new Array(20 - lines.length + 1)).join("\n"));
