@@ -7,6 +7,10 @@ terminal_init()
 
 terminal_static_writeln("McComputer v0.0")
 
-if not fexec(str("shell")) then
+local fd = fopen("shell")
+if fd == 0 then
     terminal_static_writeln("Could not start shell :O")
+else
+    fexec(fd)
+    terminal_static_writeln("\nShell exited. Shutting down")
 end

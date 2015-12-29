@@ -41,7 +41,8 @@ function next(i)
 	}
 
     var name = stuff[i].name;
-    var files = stuff[i].files;
+	var files = stuff[i].files;
+	var type = stuff[i].type;
 
     var y = nextY;
     if(stuff[i].y)
@@ -70,17 +71,35 @@ function next(i)
 
     console.log("\n\ncompiling {0}\n".format(name));
 
-	createFile(name, undefined, 1, y, 5);
-
-    var args = "{0} -x 1 -y {1} -z 7 --export ./include/{2}.d.lua ./src/util.lua {3} {4}"
-        .format(MOONCRAFT, y, name, files.join(" "), stuff[i].args || "").trim();
-
-    run("node", args, function()
+	if(type == "lib")
 	{
-		mtimeCache[name] = new Date().getTime();
-		setTimeout(next.bind(undefined, i + 1), 1);
-	});
+		files = ["./src/util.js"].concat(files);
+		var exp = "./include/{0}.d.lua".format(name);
+		compile(1, y, 7, exp, files, stuff[i].args, next.bind(undefined, i + 1));
+		createFile(name, undefined, 1, y, 5);
+	}
+	else if(type == "program")
+	{
+		files = ["./src/program_head.lua"].concat(files, "./src/program_foot.lua");
+		var exp = "./include/{0}.d.lua".format(name);
+		compile(1, y, 7, exp, files, stuff[i].args, next.bind(undefined, i + 1));
+		createFile(name, undefined, 1, y, 5);
+	}
+	else if(type == "text")
+	{
+		var content = fs.readFileSync(files[0]);
+		createFile(name, content, 1, y, 5);
+	}
 }
+
+function compile(x, y, z, exp, files, args, cb)
+{
+	var args = "{0} -x {1} -y {2} -z {3} --export {4} {5} {6}"
+        .format(MOONCRAFT, x, y, z, exp, files.join(" "), args || "").trim();
+
+    run("node", args, cb);
+}
+
 
 function createFile(name, content, x, y, z)
 {

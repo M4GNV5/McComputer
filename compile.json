@@ -1,16 +1,19 @@
 [
     {
         "name": "kernel",
+        "type": "lib",
         "y": 4,
         "files": [
             "./src/kernel.lua",
             "./src/corelibs/fs.lua",
             "./src/corelibs/keyboard.lua",
             "./src/corelibs/terminal.lua"
-        ]
+        ],
+        "main": true
     },
     {
         "name": "liblua",
+        "type": "lib",
         "files": [
             "./src/lib/input.lua",
             "./src/lib/print.lua",
@@ -20,12 +23,14 @@
     },
     {
         "name": "libdict",
+        "type": "lib",
         "files": [
             "./src/lib/dictionary.lua"
         ]
     },
     {
         "name": "shell",
+        "type": "lib",
         "files": [
             "./src/shell.lua"
         ]

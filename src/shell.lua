@@ -3,30 +3,11 @@ include("string")
 import("time")
 
 local printTime = false
-local printErrorCode = false
 local args = {}
 local starttime = 0
-local exitcode = 0
 
-function shell_args() : table
+function shell_get_args() : table
     return args
-end
-
-function exit(code : int) : void
-    if exitcode ~= 0 and printErrorCode then
-        printf("Program exited with code %d\n", exitcode)
-    elseif printTime then
-        local diff = 0.0
-        diff = gametime() - starttime
-        diff = diff / 20
-        printf("execution took %f seconds\n", diff)
-    end
-
-    fexec(str("shell"))
-end
-
-function shell_reload() : void
-    printf("Loading shell config...\n")
 end
 
 local function shell() : void
@@ -56,14 +37,23 @@ local function shell() : void
             lastInput = input
         end
 
-        local program, args = strsplit(input, charCode(" "))
+        local program = {}
+        program, args = strsplit(input, charCode(" "))
 
         starttime = gametime()
 
-        if fexec(program) then
-            break
+        local fd = fopen(program)
+
+        if fd == 0 then
+            printf("unknown command %s\n", program)
         else
-            printf("unknown command %s", program)
+            fexec(fd)
+            if printTime then
+                local diff = 0.0
+                diff = gametime() - starttime
+                diff = diff / 20
+                printf("execution took %f seconds\n", diff)
+            end
         end
     until false
 end

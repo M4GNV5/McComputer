@@ -21,6 +21,18 @@ exports.fopen = function(file)
     throw "invalid fopen " + file;
 }
 
+exports.fexec = function(fd)
+{
+    var sel = exports._fs_resolve_fd(fd);
+
+    command("execute {0} ~ ~ ~ setblock ~ ~1 ~ command_block 0 replace {Command:\"setblock ~ ~ ~ air\",auto:1b}".format(sel));
+    command("summon ArmorStand %2:jmp% {NoGravity:1,Tags:[\"stack\"],CustomName:\"fexec\"}");
+    command("scoreboard players add @e[type=ArmorStand,tag=stack] {0} 1".format(scoreName));
+
+    block(options.splitterBlock);
+    command("kill " + sel);
+}
+
 exports.fcount = function()
 {
     var val = int();
