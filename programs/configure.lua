@@ -2,15 +2,17 @@ include("stdio")
 include("string")
 include("dictionary")
 
-local fd = fopen(arguments)
-local dict = {}
+local file = strcat(arguments, str(".conf"))
+local fd = fopen(file)
 
 if fd == 0 then
-    printf("Error: could not open file\n")
+    printf("Error: could not open file %s\n", file)
 else
     printf("reading file...\n")
-    local dict = fgets(arguments)
-    printf("entering interactive mode, commands: get, set, dump, save, quit\n")
+    local dict = fgets(fd)
+    printf("entering interactive mode, commands: get, set, dump, quit\n")
+
+    local changes = false
 
     repeat
         printf(">>")
@@ -39,19 +41,25 @@ else
         elseif cmdhash == static_strhash("set") then
             local key, val = strsplit(args, charCode(" "))
             dict = dict_set(dict, key, val)
-            printf("value set\n")
+            changes = true
+            printf("set %s to %s\n", key, val)
         elseif cmdhash == static_strhash("dump") then
             dict_dump(dict)
-        elseif cmdhash == static_strhash("save") then
-            fsetpos(fd, 1, 0)
-            printf("writing changes...\n")
-            fwrites(fd, dict)
         elseif cmdhash == static_strhash("quit") then
-            printf("goodbye\n")
             -- nothing
         else
             printf("Unknown command %s", cmd)
         end
 
     until cmdhash == static_strhash("quit")
+
+    if changes then
+        fsetpos(fd, 1, 0)
+        printf("writing changes...\n")
+        fwrites(fd, dict)
+    end
+
+    printf("goodbye\n")
+
+    fclose(fd)
 end

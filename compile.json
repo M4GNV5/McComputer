@@ -78,10 +78,10 @@
         ]
     },
     {
-        "name": "config",
+        "name": "configure",
         "type": "program",
         "files": [
-            "./programs/config.lua"
+            "./programs/configure.lua"
         ]
     },
     {
