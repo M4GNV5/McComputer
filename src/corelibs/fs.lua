@@ -99,6 +99,13 @@ function fwrite(fd : int, char : int) : void
     _fs_write_uint8(fd, char)
 end
 
+function fwrites(fd : int, str : table) : void
+    str[#str + 1] = 0
+    for i = 1, #str do
+        _fs_write_uint8(fd, str[i])
+    end
+end
+
 function fsetpos(fd : int, line : int, column : int) : void
     _fs_setpos(fd, line, column)
 end
@@ -113,9 +120,7 @@ function fcreate(name : table) : int
     fd = currFd
     command("entitydata @e[type=ArmorStand,tag=fcreate] {Tags:[\"fd\"]}")
 
-    for i = 1, #name do
-        fwrite(currFd, name[i])
-    end
+    fwrites(currFd, name)
     fsetpos(currFd, 1, 0)
 
     return currFd

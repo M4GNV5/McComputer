@@ -1,5 +1,6 @@
 include("stdio")
 include("string")
+include("dictionary")
 import("time")
 
 local printTime = false
@@ -7,6 +8,24 @@ shell_args = {}
 local starttime = 0
 
 local function shell() : void
+
+    local fd = fopen("shell.conf")
+    if fd == 0 then
+        printf("creating shell.conf...\n")
+        local conf = {}
+        conf = dict_set(conf, str("printTime"), str("false"))
+        fd = fcreate(str("shell.conf"))
+        fwrites(fd, conf)
+    else
+        printf("reading shell.conf...\n")
+        local conf = fgets(fd)
+        local pTime = dict_get(conf, str("printTime"))
+        if strcmp(pTime, str("true")) then
+            printTime = true
+        end
+    end
+    fclose(fd)
+
     local lastInput = {}
 
     repeat

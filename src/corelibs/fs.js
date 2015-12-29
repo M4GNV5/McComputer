@@ -124,6 +124,7 @@ exports._fs_write_uint8 = function(fd, val)
     exports._fs_write_uint4(sel, right, 0, 0, 1);
 
     command("tp {0} ~1 ~ ~".format(sel));
+    command("execute {0} ~ ~ ~ detect ~ 34 1 air -1 tp @e[type=ArmorStand,tag=fd,r=0] 0 ~ ~2");
 
     command("kill @e[type=ArmorStand,tag=fwrite]");
 }
