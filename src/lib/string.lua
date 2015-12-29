@@ -28,16 +28,10 @@ function strcmp(str1 : table, str2 : table) : bool
 end
 
 function strcat(str1 : table, str2 : table) : table
-    if #str1 > #str2 then
-        for i = 1, #str2 do
-            str1[#str1 + 1] = str2[i]
-        end
-        return str1
-    else
-        for i = 1, #str1 do
-            table_insert(str1, 1, str2[i])
-        end
+    for i = 1, #str2 do
+        str1[#str1 + 1] = str2[i]
     end
+    return str1
 end
 
 function strhash(str : table) : int
