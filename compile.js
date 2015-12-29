@@ -86,7 +86,7 @@ function next(i)
 	{
 		files = ["./src/program_head.lua"].concat(files, "./src/program_foot.lua");
 		var exp = "./include/{0}.d.lua".format(name);
-		compile(1, y, 7, exp, files, stuff[i].args, function()
+		compile(1, y, 7, undefined, files, stuff[i].args, function()
 		{
 			mtimeCache[name] = new Date().getTime();
 			next(i + 1);
@@ -103,8 +103,9 @@ function next(i)
 
 function compile(x, y, z, exp, files, args, cb)
 {
-	var args = "{0} -x {1} -y {2} -z {3} --export {4} {5} {6}"
-        .format(MOONCRAFT, x, y, z, exp, files.join(" "), args || "").trim();
+	exp = exp ? "--export " + exp : "";
+	var args = "{0} -x {1} -y {2} -z {3} {4} {5} {6}"
+        .format(MOONCRAFT, x, y, z, exp, files.join(" "), args || "").replace(/\s\s+/g, " ").trim();
 
     run("node", args, cb);
 }
