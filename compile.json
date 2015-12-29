@@ -71,6 +71,13 @@
         ]
     },
     {
+        "name": "config",
+        "type": "program",
+        "files": [
+            "./programs/config.lua"
+        ]
+    },
+    {
         "name": "hcf",
         "type": "program",
         "files": [
