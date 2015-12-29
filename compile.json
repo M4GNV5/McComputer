@@ -57,6 +57,13 @@
         ]
     },
     {
+        "name": "mv",
+        "type": "program",
+        "files": [
+            "./programs/fileutils/mv.lua"
+        ]
+    },
+    {
         "name": "cat",
         "type": "program",
         "files": [
