@@ -34,5 +34,54 @@
         "files": [
             "./src/shell.lua"
         ]
+    },
+    {
+        "name": "help",
+        "type": "program",
+        "files": [
+            "./programs/help/help.lua"
+        ]
+    },
+    {
+        "name": "echo",
+        "type": "program",
+        "files": [
+            "./programs/echo.lua"
+        ]
+    },
+    {
+        "name": "ls",
+        "type": "program",
+        "files": [
+            "./programs/fileutils/ls.lua"
+        ]
+    },
+    {
+        "name": "cat",
+        "type": "program",
+        "files": [
+            "./programs/fileutils/cat.lua"
+        ]
+    },
+    {
+        "name": "write",
+        "type": "program",
+        "files": [
+            "./programs/fileutils/write.lua"
+        ]
+    },
+    {
+        "name": "hcf",
+        "type": "program",
+        "files": [
+            "./programs/hcf.lua"
+        ]
+    },
+    {
+        "name": "shutdown",
+        "type": "program",
+        "files": [
+            "./programs/shutdown.lua"
+        ]
     }
 ]
