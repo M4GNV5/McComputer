@@ -25,7 +25,7 @@
         "name": "libdict",
         "type": "lib",
         "files": [
-            "./src/lib/dictionary.lua"
+            "./libs/dictionary.lua"
         ]
     },
     {
