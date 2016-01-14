@@ -19,8 +19,6 @@ exports.terminal_static_write = function(s)
     for(var i = 0; i < _lines.length; i++)
         lines = lines.concat(_lines[i].match(/[^\n]{1,40}/g) || _lines[i]);
 
-    exports.terminal_static_free(lines[0].length);
-
     for(var i = 0; i < lines.length; i++)
     {
         var line = lines[i];
