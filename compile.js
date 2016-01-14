@@ -5,7 +5,7 @@ var path = require("path");
 var fs = require("fs");
 var spawn = require('child_process').spawn;
 
-var stuff = require("./compile.json");
+var stuff = require("./data/compile.json");
 var mtimeCache = {};
 if(fs.existsSync("./compile-cache.json"))
 	mtimeCache = require("./compile-cache.json");
