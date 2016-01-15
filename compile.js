@@ -13,8 +13,6 @@ if(fs.existsSync("./compile-cache.json"))
 var options = GLOBAL.options = require("./config.json");
 var rconOutput = require(RCON);
 
-var blocks = [];
-
 String.prototype.format = function()
 {
 	var val = this;
@@ -30,12 +28,6 @@ function next(i)
 {
     if(i >= stuff.length)
     {
-		if(blocks.length > 0)
-		{
-			console.log("\n\noutputting filenames and static files\n");
-			rconOutput(blocks, []);
-		}
-
 		fs.writeFileSync("./compile-cache.json", JSON.stringify(mtimeCache, undefined, 4));
 		return;
 	}
@@ -114,6 +106,7 @@ function compile(x, y, z, exp, files, args, cb)
 
 function createFile(name, content, x, y, z)
 {
+	var blocks = [];
 	x = x || 1;
 	z = z || 5;
 
@@ -153,6 +146,12 @@ function createFile(name, content, x, y, z)
 		z += 2;
 		x = _x;
 	}
+
+	if(blocks.length > 0)
+	{
+		console.log("outputting file " + name);
+		rconOutput(blocks, []);
+	}
 }
 
 function run(cmd, args, cb)
@@ -182,7 +181,6 @@ function run(cmd, args, cb)
         if(code != 0)
 		{
 			fs.writeFileSync("./compile-cache.json", JSON.stringify(mtimeCache, undefined, 4));
-			rconOutput(blocks, []);
 			process.exit(code);
 		}
 

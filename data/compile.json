@@ -42,6 +42,14 @@
             "./programs/help/help.lua"
         ]
     },
+	{
+        "name": "basic",
+        "type": "program",
+        "files": [
+			"./programs/basic/math_eval.lua",
+            "./programs/basic/basic.lua"
+        ]
+    },
     {
         "name": "echo",
         "type": "program",
@@ -110,6 +118,13 @@
         "type": "program",
         "files": [
             "./programs/shutdown.lua"
+        ]
+    },
+	{
+        "name": "love.bas",
+        "type": "text",
+        "files": [
+            "./programs/basic/love.bas"
         ]
     }
 ]
