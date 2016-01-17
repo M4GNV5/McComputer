@@ -43,11 +43,11 @@
         ]
     },
 	{
-        "name": "basic",
+        "name": "cc",
         "type": "program",
         "files": [
-			"./programs/basic/math_eval.lua",
-            "./programs/basic/basic.lua"
+			"./programs/cc/cc.lua",
+			"./programs/cc/cc.js"
         ]
     },
     {
@@ -121,10 +121,10 @@
         ]
     },
 	{
-        "name": "love.bas",
+        "name": "ex.c",
         "type": "text",
         "files": [
-            "./programs/basic/love.bas"
+            "./programs/cc/simple.c"
         ]
     }
 ]
